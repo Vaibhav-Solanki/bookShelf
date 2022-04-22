@@ -54,7 +54,7 @@ const Chats = ({ roomId }) => {
                   className="d-flex flex-row p-3 justify-content-start align-items-center"
                   key={key}
                 >
-                  <abbr title="Hyper Text Transfer protocol">
+                  <abbr title={el.senderId}>
                     <img
                       src="https://img.icons8.com/color/48/000000/circled-user-female-skin-type-7.png"
                       width={48}
