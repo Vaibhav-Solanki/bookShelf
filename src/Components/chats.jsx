@@ -81,7 +81,7 @@ const Chats = ({ roomId }) => {
           />
           <div class="input-group-append">
             <button
-              class="btn btn-outline-secondary"
+              class="btn btn-outline-success"
               type="button"
               onClick={handleSendMessage}
             >
