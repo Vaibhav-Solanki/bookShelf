@@ -7,6 +7,7 @@ const SOCKET_SERVER_URL = "https://nodbook.herokuapp.com/";
 
 const useChat = (roomId, userId) => {
   const [messages, setMessages] = useState([]);
+  // const [count, setCount] = useState(0);
   const socketRef = useRef();
 
   //for old mes
@@ -14,11 +15,16 @@ const useChat = (roomId, userId) => {
     preMessage();
   }, []);
 
+  //for debug messages
+  // useEffect(() => {
+  //   console.log(messages);
+  // }, [messages]);
+
   const preMessage = async () => {
     try {
       let res = await fetch(SOCKET_SERVER_URL + roomId);
       let data = await res.json();
-      setMessages(data);
+      if (data.length) setMessages(data);
     } catch (error) {
       console.log(error);
     }
@@ -37,7 +43,9 @@ const useChat = (roomId, userId) => {
       };
       setMessages((messages) => [...messages, incomingMessage]);
     });
-
+    // socketRef.current.on("userCount", (userCount) => {
+    //   setCount(userCount);
+    // });
     return () => {
       socketRef.current.disconnect();
     };
