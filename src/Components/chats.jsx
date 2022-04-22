@@ -1,12 +1,13 @@
 import { useState, useEffect, createRef } from "react";
-
 import useChat from "../configs/useChet";
 import "./chats.css";
 import { FaChevronLeft, FaTimes } from "react-icons/fa";
+import { useParams } from "react-router-dom";
 
 const Chats = ({ roomId }) => {
+  const userId = useParams().id;
   // const { roomId } = props.match.params;
-  const { messages, sendMessage } = useChat(roomId);
+  const { messages, sendMessage } = useChat(roomId, userId);
   const [newMessage, setNewMessage] = useState("");
   const handleNewMessageChange = (event) => {
     setNewMessage(event.target.value);
@@ -47,7 +48,7 @@ const Chats = ({ roomId }) => {
         </div>
         <div className="scrollBox" ref={myRef}>
           {messages.map((el, key) => {
-            if (!el.ownedByCurrentUser)
+            if (el.senderId != userId)
               return (
                 <div
                   className="d-flex flex-row p-3 justify-content-start align-items-center"

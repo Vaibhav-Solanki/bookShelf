@@ -5,7 +5,7 @@ const NEW_CHAT_MESSAGE_EVENT = "newChatMessage";
 // const SOCKET_SERVER_URL = "http://localhost:4000/";
 const SOCKET_SERVER_URL = "https://nodbook.herokuapp.com/";
 
-const useChat = (roomId) => {
+const useChat = (roomId, userId) => {
   const [messages, setMessages] = useState([]);
   const socketRef = useRef();
 
@@ -32,7 +32,8 @@ const useChat = (roomId) => {
     socketRef.current.on(NEW_CHAT_MESSAGE_EVENT, (message) => {
       const incomingMessage = {
         ...message,
-        ownedByCurrentUser: message.senderId === socketRef.current.id,
+        // ownedByCurrentUser: message.senderId === userId,
+        // ownedByCurrentUser: message.senderId === socketRef.current.id,
       };
       setMessages((messages) => [...messages, incomingMessage]);
     });
@@ -45,7 +46,8 @@ const useChat = (roomId) => {
   const sendMessage = (messageBody) => {
     socketRef.current.emit(NEW_CHAT_MESSAGE_EVENT, {
       body: messageBody,
-      senderId: socketRef.current.id,
+      senderId: userId,
+      // senderId: socketRef.current.id,
       roomId: roomId,
     });
   };
