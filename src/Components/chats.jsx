@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect, createRef } from "react";
+
 import useChat from "../configs/useChet";
 import "./chats.css";
+import { FaChevronLeft, FaTimes } from "react-icons/fa";
 
 const Chats = ({ roomId }) => {
   // const { roomId } = props.match.params;
@@ -15,6 +17,16 @@ const Chats = ({ roomId }) => {
     setNewMessage("");
   };
 
+  //to remain in view
+  let myRef = createRef();
+  const scrollToBottom = (node) => {
+    node.scrollTop = node.scrollHeight;
+  };
+  useEffect(() => {
+    scrollToBottom(myRef.current);
+    // console.log(myRef);
+  }, [messages]);
+
   return (
     <div className="container d-flex justify-content-center">
       <div
@@ -24,53 +36,60 @@ const Chats = ({ roomId }) => {
           position: "absolute",
           right: " 0px",
           height: "100vh",
+          width: "300px",
         }}
       >
         <div className="d-flex flex-row justify-content-between p-3 adiv text-white">
           {" "}
-          <i className="fas fa-chevron-left" />{" "}
-          <span className="pb-3">Live chat</span> <i className="fas fa-times" />{" "}
+          <FaChevronLeft /> <span className="pb-3">
+            Live chat
+          </span> <FaTimes />{" "}
         </div>
-        {messages.map((el, key) => {
-          if (!el.ownedByCurrentUser)
-            return (
-              <div
-                className="d-flex flex-row p-3 justify-content-start"
-                key={key}
-              >
-                {" "}
-                <img
-                  src="https://img.icons8.com/color/48/000000/circled-user-female-skin-type-7.png"
-                  width={30}
-                  height={30}
-                />
-                <div className="chat ml-2 p-3">{el.body}</div>
-              </div>
-            );
-          else
-            return (
-              <div
-                className="d-flex flex-row p-3 justify-content-end"
-                key={key}
-              >
-                <div className="bg-white mr-2 p-3">
-                  <span className="text-muted">{el.body}</span>
-                </div>{" "}
-                <img
-                  src="https://img.icons8.com/color/48/000000/circled-user-male-skin-type-7.png"
-                  width={30}
-                  height={30}
-                />
-              </div>
-            );
-        })}
+        <div className="scrollBox" ref={myRef}>
+          {messages.map((el, key) => {
+            if (!el.ownedByCurrentUser)
+              return (
+                <div
+                  className="d-flex flex-row p-3 justify-content-start align-items-center"
+                  key={key}
+                >
+                  <abbr title="Hyper Text Transfer protocol">
+                    <img
+                      src="https://img.icons8.com/color/48/000000/circled-user-female-skin-type-7.png"
+                      width={48}
+                      height={48}
+                    />
+                  </abbr>
+                  <div className="chat ml-2">
+                    <span className="text-muted">{el.body}</span>
+                  </div>
+                </div>
+              );
+            else
+              return (
+                <div
+                  className="d-flex flex-row p-3 justify-content-end align-items-center"
+                  key={key}
+                >
+                  <div className="bg-white chetBubble mr-2">
+                    <span className="text-muted">{el.body}</span>
+                  </div>{" "}
+                  <img
+                    src="https://img.icons8.com/color/48/000000/circled-user-male-skin-type-7.png"
+                    width={48}
+                    height={48}
+                  />
+                </div>
+              );
+          })}
+        </div>
         <div
-          class="input-group mb-3 px-3"
+          className="input-group mb-3 px-3"
           style={{ position: "absolute", bottom: "5px" }}
         >
           <input
             type="text"
-            class="form-control"
+            className="form-control"
             placeholder="Type your message"
             aria-label="Type your message"
             aria-describedby="basic-addon2"
@@ -79,9 +98,9 @@ const Chats = ({ roomId }) => {
               if (e.key === "Enter") handleSendMessage();
             }}
           />
-          <div class="input-group-append">
+          <div className="input-group-append">
             <button
-              class="btn btn-outline-success"
+              className="btn btn-outline-success"
               type="button"
               onClick={handleSendMessage}
             >
