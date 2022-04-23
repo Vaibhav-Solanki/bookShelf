@@ -55,10 +55,7 @@ const Chats = ({ roomId }) => {
                   key={key}
                 >
                   <abbr title={el.senderId} style={{ textDecoration: "none" }}>
-                    <div
-                      className="circleDiv mx-1"
-                      style={{ background: "#e2ffe8", color: "black" }}
-                    >
+                    <div className="circleDiv mx-1">
                       {el.senderId.charAt(0)}
                     </div>
                   </abbr>
@@ -73,10 +70,15 @@ const Chats = ({ roomId }) => {
                   className="d-flex flex-row p-3 justify-content-end align-items-center"
                   key={key}
                 >
-                  <div className="bg-white chetBubble mr-2">
+                  <div className="chetBubble mr-2">
                     <span className="text-muted">{el.body}</span>
                   </div>
-                  <div className="circleDiv mx-1">{el.senderId.charAt(0)}</div>
+                  <div
+                    className="circleDiv mx-1"
+                    style={{ background: "#e2ffe8", color: "black" }}
+                  >
+                    {el.senderId.charAt(0)}
+                  </div>
                 </div>
               );
           })}
