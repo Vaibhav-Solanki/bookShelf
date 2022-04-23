@@ -1,7 +1,50 @@
-import React from "react";
+import { useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useDispatch } from "react-redux";
+import { app } from "./../../firebase.config";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
+
 import "./login.css";
 import Logo from "../images/logo.png";
 export default function login() {
+  const dispatch = useDispatch();
+  const auth = getAuth();
+  const [user, loading, error] = useAuthState(auth);
+  let navigate = useNavigate();
+
+  const provider = new GoogleAuthProvider();
+
+  const addData = () => {
+    signInWithPopup(auth, provider);
+  };
+  const signout = () => {
+    auth.signOut();
+    alert("singout");
+  };
+
+  //   const a = useContext(User)
+
+  useEffect(() => {
+    if (loading) {
+      return;
+    }
+    if (user) {
+      dispatch({ type: "login", payload: user });
+      console.log(user);
+      // a.update(user.displayName)
+      auth.signOut();
+      navigate("/");
+    }
+  }, [user, loading]);
+
   return (
     <div className="text-center">
       <main className="form-signin">
@@ -38,7 +81,7 @@ export default function login() {
 
           <a
             class="w-100 btn btn-lg btn-outline-secondary btn-block text-uppercase btn-outline my-3"
-            href="#"
+            onClick={addData}
           >
             <img src="https://img.icons8.com/color/16/000000/google-logo.png" />{" "}
             Signup Using Google

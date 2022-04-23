@@ -1,6 +1,11 @@
 import Logo from "../../images/logo.png";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function navbar() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const user = useSelector((el) => el.login.state);
   return (
     <header className="p-3 bg-dark text-white">
       <div className="container">
@@ -28,12 +33,25 @@ export default function navbar() {
             />
           </form>
           <div className="text-end">
-            <button type="button" className="btn btn-outline-light me-2">
-              Login
-            </button>
-            <button type="button" className="btn btn-warning">
-              Logout
-            </button>
+            {user ? (
+              <button
+                type="button"
+                className="btn btn-warning"
+                onClick={() => dispatch({ type: "logout" })}
+              >
+                Logout
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="btn btn-outline-light me-2"
+                onClick={() => {
+                  navigate("/login");
+                }}
+              >
+                Login
+              </button>
+            )}
           </div>
         </div>
       </div>

@@ -1,0 +1,27 @@
+.imageCarousel {
+  border-radius: 10px;
+  width: 100%;
+  max-width: 650px;
+  min-width: 650px;
+  height: 450px;
+  margin: auto;
+}
+
+.slider {
+  pointer-events: none;
+  box-sizing: border-box;
+  padding: 1rem;
+  display: flex;
+  max-width: 100vw;
+  overflow: hidden;
+  flex-direction: column;
+  align-items: center;
+}
+.leftArrow,
+.rightArrow {
+  margin: 5px;
+  margin-top: 30%;
+}
+/* .slide{
+
+} */

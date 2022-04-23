@@ -10,7 +10,7 @@ export default function book() {
       <Navbar />
       <Chats roomId={id} />
       <iframe
-        src="https://archive.org/details/ourfriendburroug00barrrich/mode/2up?ref=ol&view=theater"
+        src={`https://archive.org/details/${id}/mode/2up?ref=ol&view=theater`}
         frameBorder="0"
         className="pdfBox"
       ></iframe>

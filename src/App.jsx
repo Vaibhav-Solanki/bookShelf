@@ -6,6 +6,7 @@ import { Route, Routes } from "react-router-dom";
 import { useSelector } from "react-redux";
 function App() {
   const user = useSelector((el) => el.login.state);
+  console.log(user);
   return (
     <>
       {/* <Navbar /> */}

@@ -3,23 +3,25 @@ import useChat from "../configs/useChet";
 import "./chats.css";
 import { FaChevronLeft, FaTimes } from "react-icons/fa";
 import { useParams } from "react-router-dom";
-
+import { useSelector } from "react-redux";
 const Chats = ({ roomId }) => {
-  const userId = useParams().id;
+  const userId = useSelector((el) => el.login.userName.displayName);
+  // const userId = useParams().id;
   // const { roomId } = props.match.params;
   const { messages, sendMessage } = useChat(roomId, userId);
   const [newMessage, setNewMessage] = useState("");
   const handleNewMessageChange = (event) => {
     setNewMessage(event.target.value);
   };
-
   const handleSendMessage = () => {
+    inputRef.current.value = "";
     sendMessage(newMessage);
     setNewMessage("");
   };
 
   //to remain in view
   let myRef = createRef();
+  const inputRef = createRef();
   const scrollToBottom = (node) => {
     node.scrollTop = node.scrollHeight;
   };
@@ -31,10 +33,7 @@ const Chats = ({ roomId }) => {
   return (
     <div className="card chetCard">
       <div className="d-flex flex-row justify-content-between p-3 adiv text-white">
-        {" "}
-        <FaChevronLeft /> <span className="pb-3">
-          Live chat
-        </span> <FaTimes />{" "}
+        <FaChevronLeft /> <span className="pb-3">Live chat</span> <FaTimes />
       </div>
       <div className="scrollBox" ref={myRef}>
         {messages.map((el, key) => {
@@ -76,6 +75,7 @@ const Chats = ({ roomId }) => {
         style={{ position: "absolute", bottom: "5px" }}
       >
         <input
+          ref={inputRef}
           type="text"
           className="form-control"
           placeholder="Type your message"
@@ -83,7 +83,9 @@ const Chats = ({ roomId }) => {
           aria-describedby="basic-addon2"
           onChange={handleNewMessageChange}
           onKeyPress={(e) => {
-            if (e.key === "Enter") handleSendMessage();
+            if (e.key === "Enter") {
+              handleSendMessage();
+            }
           }}
         />
         <div className="input-group-append">
