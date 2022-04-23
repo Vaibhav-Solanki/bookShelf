@@ -20,7 +20,7 @@ export default function Caro() {
           sint earum ipsa vero blanditiis rerum magnam, voluptatem eos unde
           culpa ipsam.
         </p>
-        <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
+        {/* <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
           <button type="button" className="btn btn-primary btn-lg px-4 gap-3">
             Primary button
           </button>
@@ -30,7 +30,7 @@ export default function Caro() {
           >
             Secondary
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

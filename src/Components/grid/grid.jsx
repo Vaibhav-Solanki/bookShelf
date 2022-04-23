@@ -16,7 +16,7 @@ export default function grid() {
       title: "Harry Potter and the Deathly Hallows",
       thumbnail: "https://covers.openlibrary.org/b/id/12001885-L.jpg",
       description:
-        "t's no longer safe for Harry at Hogwarts, so he and his best friends, Ron and Hermione, are on the run. Professor Dumbledore has given them clues about what they need to do to defeat the dark wizard, Lord Voldemort, once and for all, but it's up to them to figure out what these hints and suggestions really mean. Their cross-country odyssey",
+        "it's no longer safe for Harry at Hogwarts, so he and his best friends, Ron and Hermione, are on the run. Professor Dumbledore has given them clues about what they need to do to defeat the dark wizard, Lord Voldemort, once and for all, but it's up to them to figure out what these hints and suggestions really mean. Their cross-country odyssey",
       key: "harrypotterdeath0000rowl_c0f9",
     },
     {

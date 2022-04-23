@@ -80,11 +80,11 @@ export default function login() {
           </button>
 
           <a
-            class="w-100 btn btn-lg btn-outline-secondary btn-block text-uppercase btn-outline my-3"
+            class="w-100 btn btn-lg btn-outline-secondary btn-block btn-outline my-3"
             onClick={addData}
           >
             <img src="https://img.icons8.com/color/16/000000/google-logo.png" />{" "}
-            Signup Using Google
+            Signup
           </a>
         </form>
       </main>
