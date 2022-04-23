@@ -30,16 +30,7 @@ const Chats = ({ roomId }) => {
 
   return (
     <div className="container d-flex justify-content-center">
-      <div
-        className="card"
-        style={{
-          borderRadius: "20px 20px 0px 0px",
-          position: "absolute",
-          right: " 0px",
-          height: "100vh",
-          width: "300px",
-        }}
-      >
+      <div className="card chetCard">
         <div className="d-flex flex-row justify-content-between p-3 adiv text-white">
           {" "}
           <FaChevronLeft /> <span className="pb-3">
