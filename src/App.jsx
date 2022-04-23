@@ -1,13 +1,21 @@
 import "./App.css";
-import Chats from "./Components/chats";
 import Home from "./routes/home";
+import Login from "./routes/login";
+import Book from "./routes/book";
 import { Route, Routes } from "react-router-dom";
+import { useSelector } from "react-redux";
 function App() {
+  const user = useSelector((el) => el.login.state);
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/:id" element={<Chats roomId={1} />} />
-    </Routes>
+    <>
+      {/* <Navbar /> */}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/book/:id" element={user ? <Book /> : <Login />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+      {/* <Footer /> */}
+    </>
   );
 }
 export default App;

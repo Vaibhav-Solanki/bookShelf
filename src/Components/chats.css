@@ -75,11 +75,15 @@
   border-radius: 20px 20px 0px 0px !important;
   position: absolute !important;
   right: 0px;
+  /* top: 0px; */
+  /* margin-top: -101vh; */
   height: 100vh;
   width: 300px;
 }
 @media (max-width: 768px) {
   .chetCard {
     width: 100% !important;
+    position: relative !important;
+    /* margin-top: auto !important; */
   }
 }
