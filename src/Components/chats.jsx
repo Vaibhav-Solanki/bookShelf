@@ -54,12 +54,13 @@ const Chats = ({ roomId }) => {
                   className="d-flex flex-row p-3 justify-content-start align-items-center"
                   key={key}
                 >
-                  <abbr title={el.senderId}>
-                    <img
-                      src="https://img.icons8.com/color/48/000000/circled-user-female-skin-type-7.png"
-                      width={48}
-                      height={48}
-                    />
+                  <abbr title={el.senderId} style={{ textDecoration: "none" }}>
+                    <div
+                      className="circleDiv mx-1"
+                      style={{ background: "#e2ffe8", color: "black" }}
+                    >
+                      {el.senderId.charAt(0)}
+                    </div>
                   </abbr>
                   <div className="chat ml-2">
                     <span className="text-muted">{el.body}</span>
@@ -74,12 +75,8 @@ const Chats = ({ roomId }) => {
                 >
                   <div className="bg-white chetBubble mr-2">
                     <span className="text-muted">{el.body}</span>
-                  </div>{" "}
-                  <img
-                    src="https://img.icons8.com/color/48/000000/circled-user-male-skin-type-7.png"
-                    width={48}
-                    height={48}
-                  />
+                  </div>
+                  <div className="circleDiv mx-1">{el.senderId.charAt(0)}</div>
                 </div>
               );
           })}
