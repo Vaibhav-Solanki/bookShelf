@@ -16,7 +16,7 @@ export default function navbar() {
     console.log(sec);
     try {
       let res = await fetch(
-        "http://openlibrary.org/search.json?q=" + first + "&limit=50"
+        "https://openlibrary.org/search.json?q=" + first + "&limit=50"
       );
       let data = await res.json();
       console.log(data);
@@ -77,7 +77,7 @@ export default function navbar() {
               id="button-addon2"
               onClick={() => search()}
             >
-              Button
+              Search
             </button>
           </div>
 
