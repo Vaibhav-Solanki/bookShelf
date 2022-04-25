@@ -10,16 +10,13 @@
   "dependencies": {
     "firebase": "^9.6.11",
     "react": "^18.0.0",
-    "react-animations": "^1.0.0",
     "react-dom": "^18.0.0",
     "react-firebase-hooks": "^5.0.3",
     "react-icons": "^4.3.1",
     "react-redux": "^8.0.1",
-    "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.3.0",
     "redux": "^4.2.0",
-    "socket.io-client": "^4.4.1",
-    "styled-components": "^5.3.5"
+    "socket.io-client": "^4.4.1"
   },
   "devDependencies": {
     "@types/react": "^18.0.0",
