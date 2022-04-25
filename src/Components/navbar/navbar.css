@@ -1,9 +1,11 @@
 .searchRes {
   border-radius: 5px;
-  width: 100%;
   background: white;
   color: black;
   padding: 10px;
-  /* display: block; */
-  font-family: cursive;
+  position: absolute;
+  margin-top: 45px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  max-height: 300px;
+  overflow-y: scroll;
 }

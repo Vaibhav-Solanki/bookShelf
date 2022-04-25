@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import "./grid.css";
 export default function grid() {
   const navigate = useNavigate();
-  const books = [
+  let books = [
     {
       id: 1,
       title: "Harry Potter and the Philosopher's Stone",
@@ -52,7 +52,11 @@ export default function grid() {
       key: "harrypotterpriso0000rowl_g2m5",
     },
   ];
-
+  books = books.map((el) => {
+    el.description = el.description.split(" ").slice(0, 12).join(" ") + "...";
+    return el;
+  });
+  console.log(books);
   return (
     <div className="container my-4">
       <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">

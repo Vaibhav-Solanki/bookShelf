@@ -1,4 +1,5 @@
 import Logo from "../../images/logo.png";
+import Loading from "../../images/loading.gif";
 import "./navbar.css";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -6,6 +7,7 @@ import { useState, useEffect, createRef } from "react";
 export default function navbar() {
   let myRef = createRef();
   const [first, setfirst] = useState("");
+  const [load, setLoad] = useState(false);
   const [sec, setSec] = useState([]);
   useEffect(() => {
     console.log(sec);
@@ -13,20 +15,19 @@ export default function navbar() {
 
   const search = async () => {
     myRef.current.value = "";
+    setLoad(true);
     console.log(sec);
     try {
       let res = await fetch(
         "https://openlibrary.org/search.json?q=" + first + "&limit=50"
       );
       let data = await res.json();
-      console.log(data);
       data = data.docs.filter(({ ia }) => ia != undefined);
-      console.log(data);
       data = data.map(({ title, ia }) => {
         return { title: title, ia: ia[0] };
       });
-      console.log(data);
       setSec(data);
+      setLoad(false);
     } catch (error) {
       console.log(error);
     }
@@ -37,50 +38,49 @@ export default function navbar() {
   return (
     <header className="p-3 bg-dark text-white">
       <div className="container">
-        <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <div className="d-flex align-items-center justify-content-center">
           <a
             href="/"
             className="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none"
           >
             <img src={Logo} alt="" width={40} height={40} />
           </a>
-          <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-            {/* <li>
-              <a href="#" className="nav-link px-2 text-secondary">
-                Home
-              </a>
-            </li> */}
-          </ul>
-          {/* <form className="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-            <input
-              type="search"
-              className="form-control form-control-dark"
-              placeholder="Search..."
-              aria-label="Search"
-              autoComplete="off"
-              onChange={(e) => setfirst(e.target.value)}
-            />
-          </form> */}
-          <div className="input-group w-50 mx-3">
-            <input
-              ref={myRef}
-              type="text"
-              className="form-control"
-              placeholder="Enter Book Name"
-              aria-label="Recipient's username"
-              aria-describedby="button-addon2"
-              onChange={(e) => setfirst(e.target.value)}
-            />
-            <button
-              className="btn btn-outline-primary"
-              type="button"
-              id="button-addon2"
-              onClick={() => search()}
-            >
-              Search
-            </button>
+          <div className="d-flex justify-content-center">
+            <div className="input-group mx-3">
+              <input
+                ref={myRef}
+                type="text"
+                className="form-control"
+                placeholder="Enter Book Name"
+                aria-label="Recipient's username"
+                aria-describedby="button-addon2"
+                onChange={(e) => setfirst(e.target.value)}
+              />
+              <button
+                className="btn btn-outline-primary"
+                type="button"
+                id="button-addon2"
+                onClick={() => search()}
+              >
+                Search
+              </button>
+            </div>
+            {sec.length > 0 || load ? (
+              <div className="searchRes list-group">
+                {load ? <img src={Loading} alt="" srcset="" /> : ""}
+                {sec.map((el, key) => (
+                  <Link
+                    to={`/book/${el.ia}`}
+                    class="list-group-item list-group-item-action"
+                  >
+                    {el.title}
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              ""
+            )}
           </div>
-
           <div className="text-end">
             {user ? (
               <button
@@ -104,21 +104,6 @@ export default function navbar() {
           </div>
         </div>
       </div>
-      {sec.length > 0 ? (
-        <div className="searchRes my-3">
-          <ul>
-            {sec.map((el, key) => (
-              <li key={key}>
-                <Link to={`/book/${el.ia}`} style={{ textDecoration: "none" }}>
-                  {el.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ) : (
-        ""
-      )}
     </header>
   );
 }
